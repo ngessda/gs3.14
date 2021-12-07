@@ -1,0 +1,8 @@
+C:\Users\micky\source\repos\Gauss_btw_3,14\Gauss_btw_3,14\bin\Debug\Gauss_btw_3,14.exe.config
+C:\Users\micky\source\repos\Gauss_btw_3,14\Gauss_btw_3,14\bin\Debug\Gauss_btw_3,14.exe
+C:\Users\micky\source\repos\Gauss_btw_3,14\Gauss_btw_3,14\bin\Debug\Gauss_btw_3,14.pdb
+C:\Users\micky\source\repos\Gauss_btw_3,14\Gauss_btw_3,14\obj\Debug\Gauss_btw_3,14.csproj.AssemblyReference.cache
+C:\Users\micky\source\repos\Gauss_btw_3,14\Gauss_btw_3,14\obj\Debug\Gauss_btw_3,14.csproj.SuggestedBindingRedirects.cache
+C:\Users\micky\source\repos\Gauss_btw_3,14\Gauss_btw_3,14\obj\Debug\Gauss_btw_3,14.csproj.CoreCompileInputs.cache
+C:\Users\micky\source\repos\Gauss_btw_3,14\Gauss_btw_3,14\obj\Debug\Gauss_btw_3,14.exe
+C:\Users\micky\source\repos\Gauss_btw_3,14\Gauss_btw_3,14\obj\Debug\Gauss_btw_3,14.pdb
