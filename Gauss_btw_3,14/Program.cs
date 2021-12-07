@@ -12,10 +12,9 @@ namespace Gauss_btw_3_14
         {
             double[,] arr = new double[,]
             {
-                {2,3,-1,1,1 },
-                {8,12,-9,8,3 },
-                {4,6,3,-2,3 },
-                {2,3,9,-7,3 }
+                {3,2,-5,-1},
+                {2,-1,3,13},
+                {1,2,-1,9},
             };
             Gauss(arr);
             GaussRes(arr);
@@ -28,125 +27,143 @@ namespace Gauss_btw_3_14
             int m = arr.GetLength(1);
             for (int i = 0; i < n; i++)
             {
-                if (Math.Abs(arr[i, i]) != 1)
-                {
-                    bool counter = false;
-                    for (int j = i + 1; j < n; j++)
-                    {
-                        if (Math.Abs(arr[j, i]) == 1)
-                        {
-                            counter = true;
-                            for (int k = 0; k < m; k++)
-                            {
-                                var t = arr[i, k];
-                                arr[i, k] = arr[j, k];
-                                arr[j, k] = t;
-                            }
-                        }
-                    }
-                    if (!counter)
-                    {
-                        for (int j = i + 1; j < n; j++)
-                        {
-                            if (arr[j, i] != 0 && Math.Abs(arr[j, i] % arr[i, i]) == 1)
-                            {
-                                for (int k = 0; k < m; k++)
-                                {
-                                    if (arr[j, i] > 0)
-                                    {
-                                        arr[i, k] -= arr[j, k];
-                                    }
-                                    else
-                                    {
-                                        arr[i, k] += arr[j, k];
-                                    }
-                                }
-                                break;
-                            }
-                            else
-                            {
-                                var val = arr[i, i];
-                                for (int k = i; k < m; k++)
-                                {
-                                    arr[i, k] /= val;
-                                }
-                            }
-                        }
-                    }
-
-                }
+                double maxValue = arr[i, i % m];
                 for (int j = i + 1; j < n; j++)
                 {
-                    var x = arr[j, i] / arr[i, i];
-                    for (int k = 0; k < m; k++)
+                    if (Math.Abs(arr[j, i % m]) > Math.Abs(maxValue))
                     {
-                        arr[j, k] -= arr[i, k] * x;
-                        if (Math.Abs(arr[j, k]) < eps)
+                        maxValue = arr[j, i];
+                        for (int k = 0; k < m; k++)
                         {
-                            arr[j, k] = 0;
+                            double t = arr[i, k];
+                            arr[i, k] = arr[j, k];
+                            arr[j, k] = t;
                         }
                     }
                 }
-                if (i == n - 1)
+                if (Math.Abs(maxValue) > eps)
                 {
-                    double v = arr[i, i];
-                    for (int j = i; j < m; j++)
+                    for (int j = i + 1; j < n; j++)
                     {
-                        arr[i, j] /= v;
-                    }
-                }
-                if (arr[i, i] < 0)
-                {
-                    for (int j = i; j < m; j++)
-                    {
-                        arr[i, j] *= -1;
+                        double koef = arr[j, i] / maxValue;
+                        for (int k = 0; k < m; k++)
+                        {
+                            arr[j, k] -= arr[i, k] * koef;
+                            if (Math.Abs(arr[j, k]) < eps)
+                            {
+                                arr[j, k] = 0;
+                            }
+                        }
                     }
                 }
             }
-        }
+            //for (int i = 0; i < n; i++)
+            //{
+            //    if (Math.Abs(arr[i, i]) != 1)
+            //    {
+            //        bool counter = false;
+            //        for (int j = i + 1; j < n; j++)
+            //        {
+            //            if (Math.Abs(arr[j, i]) == 1)
+            //            {
+            //                counter = true;
+            //                for (int k = 0; k < m; k++)
+            //                {
+            //                    var t = arr[i, k];
+            //                    arr[i, k] = arr[j, k];
+            //                    arr[j, k] = t;
+            //                }
+            //            }
+            //        }
+            //        if (!counter)
+            //        {
+            //            for (int j = i + 1; j < n; j++)
+            //            {
+            //                if (arr[j, i] != 0 && Math.Abs(arr[j, i] % arr[i, i]) == 1)
+            //                {
+            //                    for (int k = 0; k < m; k++)
+            //                    {
+            //                        if (arr[j, i] > 0)
+            //                        {
+            //                            arr[i, k] -= arr[j, k];
+            //                        }
+            //                        else
+            //                        {
+            //                            arr[i, k] += arr[j, k];
+            //                        }
+            //                    }
+            //                    break;
+            //                }
+            //                else
+            //                {
+            //                    var val = arr[i, i];
+            //                    for (int k = i; k < m; k++)
+            //                    {
+            //                        arr[i, k] /= val;
+            //                    }
+            //                }
+            //            }
+            //        }
 
-        public static bool CheckForInfinity(double[,] arr)
-        {
-            const double eps = 0.00001;
-            bool result = true;
-            int n = arr.GetLength(0);
-            int m = arr.GetLength(1);
-            int c = 0;
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < m - 1; j++)
-                {
-                    if (Math.Abs(arr[i, j]) < eps)
-                    {
-                        c++;
-                    }
-                }
-                if (c >= m - 1 && (arr[i,i] == 0 || double.IsNaN(arr[i,i])))
-                {
-                    result = false;
-                }
-            }
-            return result;
+            //    }
+            //    for (int j = i + 1; j < n; j++)
+            //    {
+            //        var x = arr[j, i] / arr[i, i];
+            //        for (int k = 0; k < m; k++)
+            //        {
+            //            arr[j, k] -= arr[i, k] * x;
+            //            if (Math.Abs(arr[j, k]) < eps)
+            //            {
+            //                arr[j, k] = 0;
+            //            }
+            //        }
+            //    }
+            //    if (i == n - 1)
+            //    {
+            //        double v = arr[i, i];
+            //        for (int j = i; j < m; j++)
+            //        {
+            //            arr[i, j] /= v;
+            //        }
+            //    }
+            //    if (arr[i, i] < 0)
+            //    {
+            //        for (int j = i; j < m; j++)
+            //        {
+            //            arr[i, j] *= -1;
+            //        }
+            //    }
+            //    Print(arr);
+            //}
         }
-        public static bool CheckForIncompatibility(double[,] arr)
+        public static bool Check(double[,] arr)
         {
             const double eps = 0.00001;
             bool result = true;
             int n = arr.GetLength(0);
             int m = arr.GetLength(1);
-            int c = 0;
+            int c;
             for(int i = 0; i < n; i++)
             {
-                for(int j = 0; j < m - 1; j++)
+                c = 0;
+                for(int j = 0; j < m; j++)
                 {
-                    if (double.IsNaN(Math.Abs(arr[i, j])))
+                    if (double.IsNaN(Math.Abs(arr[i, j])) || Math.Abs(arr[i,j]) < eps)
                     {
                         c++;
                     }
                 }
-                if(c >= m - 1)
+                if(c == m - 1)
                 {
+                    Console.WriteLine("Система несовместима...");
                     result = false;
+                    break;
+                }
+                else if(c == m)
+                {
+                    Console.WriteLine("Система имеет бесконечное множество решений...");
+                    result = false;
+                    break;
                 }
             }
             return result;
@@ -157,30 +174,20 @@ namespace Gauss_btw_3_14
             int n = arr.GetLength(0);
             int m = arr.GetLength(1);
             double[,] res = new double[n, 1];
-            if (CheckForIncompatibility(arr))
+            if (Check(arr))
             {
-                if (CheckForInfinity(arr))
+                for (int i = n - 1; i >= 0; i--)
                 {
-                    for (int i = n - 1; i >= 0; i--)
+                    k = 1;
+                    res[i, 0] = arr[i, m - 1];
+                    for (int j = i + 1; j < m - 1; j++)
                     {
-                        k = 1;
-                        res[i, 0] = arr[i, m - 1];
-                        for (int j = i + 1; j < m - 1; j++)
-                        {
-                            res[i, 0] -= arr[i, j] * res[i + k, 0];
-                            k++;
-                        }
+                        res[i, 0] -= arr[i, j] * res[i + k, 0];
+                        k++;
                     }
-                    Print(res);
+                    res[i, 0] /= arr[i, i];
                 }
-                else
-                {
-                    Console.WriteLine("Система имеет бесконечное множество решений");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Система не совместима");
+                Print(res);
             }
         }
         public static void Print(double[,] matrix)
