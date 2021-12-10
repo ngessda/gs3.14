@@ -214,7 +214,6 @@ namespace Gauss_btw_3_14
                 if (i == counter)
                 {
                     res[i, 0] = "x";
-                    c = true;
                     continue;
                 }
                 res[i, 0] = Convert.ToString(arr[i, m - 1]);
@@ -228,20 +227,13 @@ namespace Gauss_btw_3_14
                         }
                         else
                         {
-                            if (c)
-                            {
-                                string s = res[i + k, 0].Substring(0, res[i + k, 0].IndexOf('+'));
-                                string g = res[i + k, 0].Substring(res[i + k, 0].IndexOf('+'));
-                                g = g.Remove(g.Length - 2);
-                                g = g.Remove(0, 1);
-                                double a = arr[i, j] * double.Parse(s) * double.Parse(g);
-                                a = Math.Round(a, 2);
-                                res[i, 0] += " + " + Convert.ToString(-a) + "x ";
-                            }
-                            else
-                            {
-                                res[i, 0] += Convert.ToString(-(arr[i, j] * Convert.ToDouble(res[i + k, 0])));
-                            }
+                            string s = res[i + k, 0].Substring(0, res[i + k, 0].IndexOf('+'));
+                            string g = res[i + k, 0].Substring(res[i + k, 0].IndexOf('+'));
+                            g = g.Remove(g.Length - 2);
+                            g = g.Remove(0, 1);
+                            double a = arr[i, j] * double.Parse(s) * double.Parse(g);
+                            a = Math.Round(a, 2);
+                            res[i, 0] += " + " + Convert.ToString(-a) + "x ";
                         }
                     }
                     else
@@ -252,20 +244,13 @@ namespace Gauss_btw_3_14
                         }
                         else
                         {
-                            if (c)
-                            {
-                                string s = res[i + k, 0].Substring(0, res[i + k, 0].IndexOf('+'));
-                                string g = res[i + k, 0].Substring(res[i + k, 0].IndexOf('+'));
-                                g = g.Remove(g.Length - 2);
-                                g = g.Remove(0, 1);
-                                double a = arr[i, j] * double.Parse(s) * double.Parse(g);
-                                a = Math.Round(a, 2);
-                                res[i, 0] += " - " + Convert.ToString(-a) + "x ";
-                            }
-                            else
-                            {
-                                res[i, 0] += Convert.ToString(-(arr[i, j] * Convert.ToDouble(res[i + k, 0])));
-                            }
+                            string s = res[i + k, 0].Substring(0, res[i + k, 0].IndexOf('+'));
+                            string g = res[i + k, 0].Substring(res[i + k, 0].IndexOf('+'));
+                            g = g.Remove(g.Length - 2);
+                            g = g.Remove(0, 1);
+                            double a = arr[i, j] * double.Parse(s) * double.Parse(g);
+                            a = Math.Round(a, 2);
+                            res[i, 0] += " - " + Convert.ToString(-a) + "x ";
                         }
                     }
                     k++;
