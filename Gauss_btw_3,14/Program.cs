@@ -13,11 +13,12 @@ namespace Gauss_btw_3_14
             double[,] arr = new double[,]
             {
                 {3,2,-5,-1},
-                {2,-1,3,13},
-                {1,2,-1,9},
+                {0,0,0,0},
+                {2,-1,3,13}
             };
             Gauss(arr);
             GaussRes(arr);
+            Print(arr);
             Console.ReadKey();
         }
         public static void Gauss(double[,] arr)
@@ -49,11 +50,21 @@ namespace Gauss_btw_3_14
                         for (int k = 0; k < m; k++)
                         {
                             arr[j, k] -= arr[i, k] * koef;
+                            arr[j, k] = Math.Round(arr[j, k], 2);
                             if (Math.Abs(arr[j, k]) < eps)
                             {
                                 arr[j, k] = 0;
                             }
                         }
+                    }
+                }
+                if(arr[i,i] != 1 && arr[i,i] != 0)
+                {
+                    var val = arr[i, i];
+                    for (int k = i; k < m; k++)
+                    {
+                        arr[i, k] /= val;
+                        arr[i, k] = Math.Round(arr[i, k], 2);
                     }
                 }
             }
@@ -143,25 +154,25 @@ namespace Gauss_btw_3_14
             int n = arr.GetLength(0);
             int m = arr.GetLength(1);
             int c;
-            for(int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
             {
                 c = 0;
-                for(int j = 0; j < m; j++)
+                for (int j = 0; j < m; j++)
                 {
-                    if (double.IsNaN(Math.Abs(arr[i, j])) || Math.Abs(arr[i,j]) < eps)
+                    if (double.IsNaN(Math.Abs(arr[i, j])) || Math.Abs(arr[i, j]) < eps)
                     {
                         c++;
                     }
                 }
-                if(c == m - 1)
+                if (c == m - 1)
                 {
                     Console.WriteLine("Система несовместима...");
                     result = false;
                     break;
                 }
-                else if(c == m)
+                else if (c == m)
                 {
-                    Console.WriteLine("Система имеет бесконечное множество решений...");
+                    PrintInf(arr, i);
                     result = false;
                     break;
                 }
@@ -190,6 +201,92 @@ namespace Gauss_btw_3_14
                 Print(res);
             }
         }
+        public static void PrintInf(double[,] arr, int counter)
+        {
+            int n = arr.GetLength(0);
+            int m = arr.GetLength(1);
+            string[,] res = new string[n, 1];
+            bool c = false;
+            int k;
+            for (int i = n-1; i >= 0; i--)
+            {
+                k = 1;
+                if (i == counter)
+                {
+                    res[i, 0] = "x";
+                    c = true;
+                    continue;
+                }
+                res[i, 0] = Convert.ToString(arr[i, m - 1]);
+                for (int j = i + 1; j < m - 1; j++) 
+                {
+                    if(arr[i,j] < 0)
+                    {
+                        if (res[i + k, 0] == "x")
+                        {
+                            res[i, 0] += " + " + Convert.ToString(-arr[i, j]) + "x ";
+                        }
+                        else
+                        {
+                            if (c)
+                            {
+                                string s = res[i + k, 0].Substring(0, res[i + k, 0].IndexOf('+'));
+                                string g = res[i + k, 0].Substring(res[i + k, 0].IndexOf('+'));
+                                g = g.Remove(g.Length - 2);
+                                g = g.Remove(0, 1);
+                                double a = arr[i, j] * double.Parse(s) * double.Parse(g);
+                                a = Math.Round(a, 2);
+                                res[i, 0] += " + " + Convert.ToString(-a) + "x ";
+                            }
+                            else
+                            {
+                                res[i, 0] += Convert.ToString(-(arr[i, j] * Convert.ToDouble(res[i + k, 0])));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (res[i + k, 0] == "x")
+                        {
+                            res[i, 0] += " - " + Convert.ToString(-arr[i, j]) + "x ";
+                        }
+                        else
+                        {
+                            if (c)
+                            {
+                                string s = res[i + k, 0].Substring(0, res[i + k, 0].IndexOf('+'));
+                                string g = res[i + k, 0].Substring(res[i + k, 0].IndexOf('+'));
+                                g = g.Remove(g.Length - 2);
+                                g = g.Remove(0, 1);
+                                double a = arr[i, j] * double.Parse(s) * double.Parse(g);
+                                a = Math.Round(a, 2);
+                                res[i, 0] += " - " + Convert.ToString(-a) + "x ";
+                            }
+                            else
+                            {
+                                res[i, 0] += Convert.ToString(-(arr[i, j] * Convert.ToDouble(res[i + k, 0])));
+                            }
+                        }
+                    }
+                    k++;
+                }
+            }
+            Print(res);
+        }
+        public static void Print(string[,] matrix)
+        {
+            int n = matrix.GetLength(0);
+            int m = matrix.GetLength(1);
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    Console.Write(matrix[i,j] + "\t");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
         public static void Print(double[,] matrix)
         {
             int n = matrix.GetLength(0);
@@ -198,8 +295,8 @@ namespace Gauss_btw_3_14
             {
                 for(int j = 0; j < m; j++) 
                 {
-                    var value = Math.Round(matrix[i,j], 2);
-                    Console.Write(value + "\t");
+                    //var value = Math.Round(matrix[i,j], 2);
+                    Console.Write(matrix[i,j] + "\t");
                 }
                 Console.WriteLine();
             }
