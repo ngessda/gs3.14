@@ -233,6 +233,7 @@ namespace Gauss_btw_3_14
                             g = g.Remove(0, 1);
                             double a = arr[i, j] * double.Parse(s) * double.Parse(g);
                             a = Math.Round(a, 2);
+                            a += arr[i, j + 1];
                             res[i, 0] += " + " + Convert.ToString(-a) + "x ";
                         }
                     }
@@ -250,11 +251,17 @@ namespace Gauss_btw_3_14
                             g = g.Remove(0, 1);
                             double a = arr[i, j] * double.Parse(s) * double.Parse(g);
                             a = Math.Round(a, 2);
+                            a += arr[i, j + 1];
                             res[i, 0] += " - " + Convert.ToString(-a) + "x ";
                         }
                     }
                     k++;
                 }
+            }
+            for(int i = 0; i < n; i++)
+            {
+                res[i, 0] = res[i, 0].Substring(0, res[i, 0].IndexOf('x'));
+                res[i, 0] = res[i, 0] + "x";
             }
             Print(res);
         }
