@@ -261,7 +261,7 @@ namespace Gauss_btw_3_14
             for(int i = 0; i < n; i++)
             {
                 res[i, 0] = res[i, 0].Substring(0, res[i, 0].IndexOf('x'));
-                res[i, 0] = res[i, 0] + "x";
+                res[i, 0] = res[i, 0] + $"(x.{counter})";
             }
             Print(res);
         }
