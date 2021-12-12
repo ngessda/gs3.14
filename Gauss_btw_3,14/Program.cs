@@ -217,6 +217,14 @@ namespace Gauss_btw_3_14
                     continue;
                 }
                 res[i, 0] = Convert.ToString(arr[i, m - 1]);
+                if(i > counter)
+                {
+                    for (int j = i + 1; j < m - 1; j++)
+                    {
+                        res[i, 0] = Convert.ToString(Convert.ToDouble(res[i,0]) - (arr[i, j] * Convert.ToDouble(res[i + k, 0])));
+                        k++;
+                    }
+                }
                 for (int j = i + 1; j < m - 1; j++) 
                 {
                     if(arr[i,j] < 0)
@@ -261,7 +269,7 @@ namespace Gauss_btw_3_14
             for(int i = 0; i < n; i++)
             {
                 res[i, 0] = res[i, 0].Substring(0, res[i, 0].IndexOf('x'));
-                res[i, 0] = res[i, 0] + $"(x.{counter})";
+                res[i, 0] = res[i, 0] + $"(x.{counter + 1})";
             }
             Print(res);
         }
