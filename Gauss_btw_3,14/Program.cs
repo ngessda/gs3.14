@@ -68,84 +68,6 @@ namespace Gauss_btw_3_14
                     }
                 }
             }
-            //for (int i = 0; i < n; i++)
-            //{
-            //    if (Math.Abs(arr[i, i]) != 1)
-            //    {
-            //        bool counter = false;
-            //        for (int j = i + 1; j < n; j++)
-            //        {
-            //            if (Math.Abs(arr[j, i]) == 1)
-            //            {
-            //                counter = true;
-            //                for (int k = 0; k < m; k++)
-            //                {
-            //                    var t = arr[i, k];
-            //                    arr[i, k] = arr[j, k];
-            //                    arr[j, k] = t;
-            //                }
-            //            }
-            //        }
-            //        if (!counter)
-            //        {
-            //            for (int j = i + 1; j < n; j++)
-            //            {
-            //                if (arr[j, i] != 0 && Math.Abs(arr[j, i] % arr[i, i]) == 1)
-            //                {
-            //                    for (int k = 0; k < m; k++)
-            //                    {
-            //                        if (arr[j, i] > 0)
-            //                        {
-            //                            arr[i, k] -= arr[j, k];
-            //                        }
-            //                        else
-            //                        {
-            //                            arr[i, k] += arr[j, k];
-            //                        }
-            //                    }
-            //                    break;
-            //                }
-            //                else
-            //                {
-            //                    var val = arr[i, i];
-            //                    for (int k = i; k < m; k++)
-            //                    {
-            //                        arr[i, k] /= val;
-            //                    }
-            //                }
-            //            }
-            //        }
-
-            //    }
-            //    for (int j = i + 1; j < n; j++)
-            //    {
-            //        var x = arr[j, i] / arr[i, i];
-            //        for (int k = 0; k < m; k++)
-            //        {
-            //            arr[j, k] -= arr[i, k] * x;
-            //            if (Math.Abs(arr[j, k]) < eps)
-            //            {
-            //                arr[j, k] = 0;
-            //            }
-            //        }
-            //    }
-            //    if (i == n - 1)
-            //    {
-            //        double v = arr[i, i];
-            //        for (int j = i; j < m; j++)
-            //        {
-            //            arr[i, j] /= v;
-            //        }
-            //    }
-            //    if (arr[i, i] < 0)
-            //    {
-            //        for (int j = i; j < m; j++)
-            //        {
-            //            arr[i, j] *= -1;
-            //        }
-            //    }
-            //    Print(arr);
-            //}
         }
         public static bool Check(double[,] arr)
         {
@@ -206,7 +128,6 @@ namespace Gauss_btw_3_14
             int n = arr.GetLength(0);
             int m = arr.GetLength(1);
             string[,] res = new string[n, 1];
-            bool c = false;
             int k;
             for (int i = n-1; i >= 0; i--)
             {
